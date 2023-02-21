@@ -12,7 +12,34 @@ var scoresScreen = document.querySelector("#high-scores-page");
 var timerCountDown = document.querySelector("#time");
 var viewHighScores = document.querySelector("#view-highscores");
 
-
+//quiz questions
+var questions = [
+    {
+        question: "Commonly used data types DO NOT include",
+        answersAll: ["strings", "booleans", "numbers", "alerts"],
+        answerCorrect: "alerts"
+    },
+    {
+        question: "The condition in an if/else statement is enclosed with what?",
+        answersAll: ["parenthesis", "quotes", "curly brackets", "square brackets"],
+        answerCorrect: "parenthesis"
+    },
+    {
+        question: "Arrays in javascript can be used to store what",
+        answersAll: ["other arrays", "booleans", "numbers and strings", "all of the above"],
+        answerCorrect: "all of the above"
+    },
+    {
+        question: "String Values must be enclosed within _______ when being assigned variables.",
+        answersAll: ["curly brackets", "parenthesis", "quotes", "commas"],
+        answerCorrect: "quotes"
+    },
+    {
+        question: "What is a very useful tool for users during development and debugging for printing content for the debugger?",
+        answersAll: ["terminal/bash", "JavaScript", "console.log()", "for loops"],
+        answerCorrect: "console.log()"
+    },
+];
 
 // click event to view the highscores 
 viewHighScores.addEventListener("click", function(){
