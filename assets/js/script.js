@@ -48,6 +48,8 @@ function openPage() {
     quizScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "hide");
     scoresScreen.setAttribute("class", "hide");
+    console.log(endScreen)
+
 };
 
 

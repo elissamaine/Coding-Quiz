@@ -1,0 +1,29 @@
+:root {
+    --cream: #f8f7c1;
+    --blue: #47e7fc;
+    --dark-blue: #446972;
+    --pink: #f779cd;
+    --fuchsia: #9e1675;
+    --dark: #29041c;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.high-scores {
+    margin-left: 10px;
+}
+
+.timer-dispaly {
+    margin-right: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
