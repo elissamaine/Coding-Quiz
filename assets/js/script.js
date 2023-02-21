@@ -13,6 +13,7 @@ var scoresScreen = document.getElementById("high-scores-page");
 var timerCountDown = document.getElementById("timer");
 var viewHighScores = document.getElementById('view-highscores');
 
+var highScores
 
 
 //quiz questions
@@ -44,25 +45,63 @@ var questions = [
     },
 ];
 
+//function that hides the question page and scores page when the page is first loaded
 function openPage() {
     quizScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "hide");
     scoresScreen.setAttribute("class", "hide");
-    console.log(endScreen)
-
 };
 
+//this function pulls up all the scored that were saved to the 
+function showHighScores() {
+    var scores =JSON.parse(localStorage.getItem(highScores))
+}
 
 // click event to view the highscores 
 viewHighScores.onclick = function() {
-    scoresScreen.setAttribute("class", "show")
+    quizScreen.setAttribute("class", "hide");
+    endScreen.setAttribute("class", "hide");
+    startScreen.setAttribute("class", "hide");
+    scoresScreen.setAttribute("class", "show");
+
+    showHighScores();
 }
 
-//need a function to hide the different parts of the html that i dont want to see when the page is loaded 
+//runs start quiz function when the start button is clicked
+startButton.onclick = function() {
+    startQuiz()
+}
 
-//function that starts quiz
+//function that will run to stop the quiz either when time runs out or when all the questions have been answered 
+function stopQuiz() {
+    quizScreen.setAttribute("class", "hide");
+    startScreen.setAttribute("class", "hide");
+    scoresScreen.setAttribute("class", "hide");
+    endScreen.setAttribute("class", "show");
 
-//function that pulls up the questions 
+}
+
+function startQuiz() {
+    startScreen.setAttribute("class", "hide");
+    endScreen.setAttribute("class", "hide");
+    scoresScreen.setAttribute("class", "hide");
+    quizScreen.setAttribute("class", "show");
+
+    //start timer 
+    timer = setInterval(function(){
+        if (time >= 1) {
+            timerCountDown.textContent = time;
+            time = time - 1;
+        } else if (time === 0) {
+            timerCountDown.textContent = "";
+            stopQuiz();
+        }
+
+    }, 1000)
+    // pull up questions 
+
+}
+
 //turn the varriable questions into interactive buttons that the user can click to answer
 //when a button is clicked it moves on to the next question if question is wrong it will take 10 sec of the timer 
 //when all question are answered then it will run the end quiz function
