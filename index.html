@@ -12,11 +12,56 @@
  <header>
     <nav class="nav-wrapper">
        <div class="high-scores">
-        <h3 id="view-highscores" class=""></h3>
+        <!--this is where the user can click to view the high scores-->
+        <h3 id="view-highscores">View High Score</h3>
        </div> 
+       <div>
+        <!--this div despalyes the remaining time in the header-->
+        <h3 class="timer">Time: <span id="time">0</span></h3>
+       </div>
     </nav>
-    
  </header>
+
+ <main>
+    <section class="quiz-wrapper">
+        <div class="start-page" id="start-page">
+            <h1>Coding Quiz</h1>
+            <p>Try answering the following questions to quiz your coding knowledge. Be careful though, because you'll be timed and incorrect answers will decrease the remaining amount of time. Good Luck! </p>
+            <button id="start-button" class="btn">STRAT QUIZ</button>
+        </div> 
+    
+        <div id="quiz-page">
+            <div clss="question-answer">
+                <div class="questions">
+                    <h1 id="quiz-question"></h1>
+                </div>
+            </div>
+            <div class="question-answer">
+                <div id="answers"></div>
+                <div id="key" class="key"></div>
+            </div>
+        </div>
+
+        <div class="quiz-end-page" id="quiz-end-page">
+            <h2>Congratulations!</h2>
+            <h3>Your score is <span id="score">0</span></h3>
+            <label for="initials-input">Enter yor initials:</label>
+            <input type="text" name="initials-input" maxlength="3" id="initials">
+            <button id="initials-input-btn" type="submit" class="btn">Submit</button>
+        </div>
+    
+        <div class="high-scores-page">
+            <div id="scores">
+                <h2>High Scores </h2>
+                <ol id="display-scores"></ol>
+                <a href="index.html"><button id="try-again-btn" class="btn">Try Again</button></a>
+                <button id="clear-scores-btn" class="btn">Clear Scores</button>
+            </div>
+        </div>
+    </section>
+
+
+ </main>
 
     <script src="./assets/js/script.js"></script>
 </body>
