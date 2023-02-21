@@ -4,7 +4,7 @@
     <title>Javascript Quiz</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width initial-scale-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
@@ -17,7 +17,8 @@
        </div> 
        <div>
         <!--this div despalyes the remaining time in the header-->
-        <h3 class="timer">Time: <span id="time">0</span></h3>
+        <h3 id="time">Time:</h3>
+        <h3 id="timer"></h3>
        </div>
     </nav>
  </header>
@@ -33,7 +34,7 @@
         </div> 
 
         <!--this will appear when the start quiz button is pressed-->
-        <div id="quiz-page">
+        <div class="quiz-page" id="quiz-page">
             <div clss="question-answer">
                 <div class="questions">
                     <h1 id="quiz-question"></h1>
@@ -56,7 +57,7 @@
         </div>
 
         <!--this page shows all the high scores that have been saved into local storage-->
-        <div class="high-scores-page">
+        <div class="high-scores-page" id="high-scores-page">
             <div id="scores">
                 <h2>High Scores </h2>
                 <ol id="display-scores"></ol>

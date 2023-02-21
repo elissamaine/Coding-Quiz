@@ -3,14 +3,17 @@ var time = 60;
 var timer
 
 // variables created with document query selector 
-var startScreen = document.querySelector("#start-page");
-var startButton = document.querySelector("#start-button");
-var quizScreen = document.querySelector("#quiz-page");
-var key = document.querySelector("#key");
-var answers = document.querySelector("#answers");
-var scoresScreen = document.querySelector("#high-scores-page");
-var timerCountDown = document.querySelector("#time");
-var viewHighScores = document.querySelector("#view-highscores");
+let startScreen = document.getElementById("start-page");
+var startButton = document.getElementById("start-button");
+var quizScreen = document.getElementById("quiz-page");
+var key = document.getElementById("key");
+var answers = document.getElementById("answers");
+var endScreen = document.getElementById("quiz-end-page")
+var scoresScreen = document.getElementById("high-scores-page");
+var timerCountDown = document.getElementById("timer");
+var viewHighScores = document.getElementById('view-highscores');
+
+
 
 //quiz questions
 var questions = [
@@ -41,10 +44,17 @@ var questions = [
     },
 ];
 
+function openPage() {
+    quizScreen.setAttribute("class", "hide");
+    endScreen.setAttribute("class", "hide");
+    scoresScreen.setAttribute("class", "hide");
+};
+
+
 // click event to view the highscores 
-viewHighScores.addEventListener("click", function(){
-    
-}); 
+viewHighScores.onclick = function() {
+    scoresScreen.setAttribute("class", "show")
+}
 
 //need a function to hide the different parts of the html that i dont want to see when the page is loaded 
 
@@ -65,3 +75,4 @@ viewHighScores.addEventListener("click", function(){
 //add functions for the buttons to either start the quiz again or clear the scores
 
 
+openPage();
