@@ -55,9 +55,13 @@ function openPage() {
     scoresScreen.setAttribute("class", "hide");
 };
 
+//start timer 
+
+
 //save scores from the end quiz page 
 function saveHighScore() {
     var initials = initialsInput.value 
+    
     
     if (initials !== "") {
         var highScores = JSON.parse(localStorage.getItem("highscores"))
@@ -110,11 +114,27 @@ function showQuestions() {
         console.log(answerBtns)
         //adds numbers and the text to the buttons 
         answerBtns.textContent = i +1 + ". " + answer;
+        //click event that will lisent to a click event on the buttons 
+        answerBtns.onclick = answerSelection;
         answers.appendChild(answerBtns);
     });
+
+    function answerSelection() {
+        if (this.value !== questions[questionIndex].answerCorrect) {
+            time = time - 10
+            if (time < 10) {
+                time = 0
+            };
+            timerCountDown.textContent = time;
+            key.textContent = "Incorrect.";
+        } else if(this.value == questions[questionIndex].answerCorrect) {
+            key.textContent = "Correct!";
+        };
+
+    };
+
+    currentQuestion++;
 }
-
-
 
 function startQuiz() {
     startScreen.setAttribute("class", "hide");
@@ -122,16 +142,14 @@ function startQuiz() {
     scoresScreen.setAttribute("class", "hide");
     quizScreen.setAttribute("class", "show");
 
-    //start timer 
-    timer = setInterval(function(){
-        if (time >= 1) {
-            timerCountDown.textContent = time;
-            time = time - 1;
-        } else if (time === 0) {
-            timerCountDown.textContent = "";
-            stopQuiz();
-        }
-
+   timer = setInterval(function(){
+     if (time >= 1) {
+        timerCountDown.textContent = time;
+        time = time - 1;
+    } else if (time === 0) {
+        timerCountDown.textContent = "";
+        stopQuiz();
+    }
     }, 1000)
     // pull up questions 
     
@@ -142,14 +160,10 @@ function startQuiz() {
 //when a button is clicked it moves on to the next question if question is wrong it will take 10 sec of the timer 
 //when all question are answered then it will run the end quiz function
 
-//count down when the quiz is started when it gets to zero it will run the end quiz function
 
 // function to end quiz that will show the quiz end page that will have the user enter thir initials and it will save thir score and initials into local storage 
-
-// have a function to order the bscores from highest to lowest 
-
-// add event listener to view high scores 
-//add functions for the buttons to either start the quiz again or clear the scores
+ 
+//add functions for the buttons to either restart the quiz again or clear the scores
 
 
 openPage();
