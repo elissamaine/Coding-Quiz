@@ -1,4 +1,5 @@
 //variables 
+var questionIndex = 0
 var time = 60;
 var timer
 
@@ -8,7 +9,9 @@ var startButton = document.getElementById("start-button");
 var quizScreen = document.getElementById("quiz-page");
 var key = document.getElementById("key");
 var answers = document.getElementById("answers");
-var endScreen = document.getElementById("quiz-end-page")
+var endScreen = document.getElementById("quiz-end-page");
+var initialsInput = document.getElementById('initials');
+var submitButton = document.getElementById("initials-input-btn");
 var scoresScreen = document.getElementById("high-scores-page");
 var timerCountDown = document.getElementById("timer");
 var viewHighScores = document.getElementById('view-highscores');
@@ -52,6 +55,15 @@ function openPage() {
     scoresScreen.setAttribute("class", "hide");
 };
 
+//save scores from the end quiz page 
+function saveHighScore() {
+    var initials = initialsInput.value 
+    
+    if (initials !== "") {
+        var highScores = JSON.parse(localStorage.getItem("highscores"))
+    }
+}
+
 //this function pulls up all the scored that were saved to the 
 function showHighScores() {
     var scores =JSON.parse(localStorage.getItem(highScores))
@@ -81,6 +93,29 @@ function stopQuiz() {
 
 }
 
+//function that will be called when the quiz starts that pulls up the questions from the questions variable
+function showQuestions() {
+    var currentQuestion = questions[questionIndex];
+    console.log(currentQuestion)
+
+    var questionEl = document.getElementById('quiz-question');
+    questionEl.textContent = currentQuestion.question;
+
+    //answers.innerHTML = "";
+
+    currentQuestion.answersAll.forEach(function(answer, i) {
+        var answerBtns = document.createElement("button");
+        answerBtns.setAttribute("class", "btn");
+        answerBtns.setAttribute("value", answer);
+        console.log(answerBtns)
+        //adds numbers and the text to the buttons 
+        answerBtns.textContent = i +1 + ". " + answer;
+        answers.appendChild(answerBtns);
+    });
+}
+
+
+
 function startQuiz() {
     startScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "hide");
@@ -99,7 +134,8 @@ function startQuiz() {
 
     }, 1000)
     // pull up questions 
-
+    
+    showQuestions()
 }
 
 //turn the varriable questions into interactive buttons that the user can click to answer
