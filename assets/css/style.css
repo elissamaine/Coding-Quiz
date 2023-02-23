@@ -37,6 +37,8 @@ body {
 
 .high-scores {
     margin-left: 10px;
+    color: var(--dark-blue);
+    text-decoration: var(--blue) wavy underline;
 }
 
 .quiz-wrapper {

@@ -15,6 +15,7 @@ var submitButton = document.getElementById("initials-input-btn");
 var scoresScreen = document.getElementById("high-scores-page");
 var timerCountDown = document.getElementById("timer");
 var viewHighScores = document.getElementById('view-highscores');
+var tryAgain = document.getElementById('try-again-btn');
 
 var highScores
 
@@ -60,18 +61,19 @@ function openPage() {
 
 //save scores from the end quiz page 
 function saveHighScore() {
-    var initials = initialsInput.value 
+    var initials = initialsInput.value
     
-    
+
     if (initials !== "") {
-        var highScores = JSON.parse(localStorage.getItem("highscores"))
+        var highScores = JSON.parse(window.localStorage.getItem("highScores"))
         var newScore = {
-            initials: initials,
-            score: time
+            name: initials,
+            score: time,
         };
 
         highScores.push(newScore);
-        localStorage.setItem('highScores', JSON.stringify(highScores));
+        
+        window.localStorage.setItem('highScores', JSON.stringify(highScores));
     }
 
     showHighScores();
@@ -79,16 +81,21 @@ function saveHighScore() {
 
 //this function pulls up all the scored that were saved to the 
 function showHighScores() {
-    var highScores =JSON.parse(localStorage.getItem(highScores))
+    var highScores =JSON.parse(window.localStorage.getItem(highScores))
     
     highScores.sort(function(a, b) {
-        return b.score - a.initials;
+        return b.score - a.score;
     });
     
     highScores.forEach(function(score) {
     var liEl = document.createElement('li');
-    liEl.textContent = 
+    liEl.textContent = score.initials + " - " + score.score;
+
+    var olEl = document.getElementById('display-scores');
+    olEl.appendChild(liEl);
     });
+
+    
 }
 
 // click event to view the highscores 
@@ -138,6 +145,7 @@ function showQuestions() {
     });
 
     function answerSelection() {
+        //takes to seconds off the timer when the wrong button is pressed
         if (this.value !== questions[questionIndex].answerCorrect) {
             time = time - 10
             if (time < 10) {
@@ -151,6 +159,8 @@ function showQuestions() {
         
         
     };
+    //when a button is clicked it moves on to the next question
+    //when all question are answered then it will run the stop quiz function
     //figure out how to get to the next question 
     answerBtns.onclick = currentQuestion ++;
 
@@ -182,13 +192,14 @@ function startQuiz() {
 }
 
 
-//when a button is clicked it moves on to the next question if question is wrong it will take 10 sec of the timer 
-//when all question are answered then it will run the end quiz function
 
 
-// function to end quiz that will show the quiz end page that will have the user enter thir initials and it will save thir score and initials into local storage 
  
-//add functions for the buttons to either restart the quiz again or clear the scores
+//add functions for the buttons to restart the quiz again
+tryAgain.onclick = openPage();
+
+submitButton.onclick = saveHighScore();
+
 
 
 openPage();
