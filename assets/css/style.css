@@ -1,10 +1,33 @@
 :root {
-    --cream: #f8f7c1;
+    --cream: #fafae2;
     --blue: #47e7fc;
-    --dark-blue: #446972;
+    --dark-blue: #2d2e57;
     --pink: #f779cd;
     --fuchsia: #9e1675;
     --dark: #29041c;
+}
+
+body {
+    background-color: var(--cream);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.quiz-wrapper {
+    align-items: center;
+    text-align: center;
+}
+
+.answers {
+    align-items: center;
+}
+
+.btn {
+    background-color: var(--blue);
+    color: var(--dark-blue);
+    margin: 10px;
+    padding: 5px;
+    border-radius: 15%;
+    font-size: 25;
 }
 
 .nav-wrapper {

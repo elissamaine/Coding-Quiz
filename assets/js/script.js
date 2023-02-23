@@ -1,5 +1,5 @@
 //variables 
-var questionIndex = 0
+var questionIndex = 0;
 var time = 60;
 var timer
 
@@ -55,7 +55,7 @@ function openPage() {
     scoresScreen.setAttribute("class", "hide");
 };
 
-//start timer 
+
 
 
 //save scores from the end quiz page 
@@ -65,12 +65,30 @@ function saveHighScore() {
     
     if (initials !== "") {
         var highScores = JSON.parse(localStorage.getItem("highscores"))
+        var newScore = {
+            initials: initials,
+            score: time
+        };
+
+        highScores.push(newScore);
+        localStorage.setItem('highScores', JSON.stringify(highScores));
     }
+
+    showHighScores();
 }
 
 //this function pulls up all the scored that were saved to the 
 function showHighScores() {
-    var scores =JSON.parse(localStorage.getItem(highScores))
+    var highScores =JSON.parse(localStorage.getItem(highScores))
+    
+    highScores.sort(function(a, b) {
+        return b.score - a.initials;
+    });
+    
+    highScores.forEach(function(score) {
+    var liEl = document.createElement('li');
+    liEl.textContent = 
+    });
 }
 
 // click event to view the highscores 
@@ -105,9 +123,9 @@ function showQuestions() {
     var questionEl = document.getElementById('quiz-question');
     questionEl.textContent = currentQuestion.question;
 
-    //answers.innerHTML = "";
 
     currentQuestion.answersAll.forEach(function(answer, i) {
+        //turned the varriable questions into interactive buttons that the user can click to answer
         var answerBtns = document.createElement("button");
         answerBtns.setAttribute("class", "btn");
         answerBtns.setAttribute("value", answer);
@@ -130,18 +148,25 @@ function showQuestions() {
         } else if(this.value == questions[questionIndex].answerCorrect) {
             key.textContent = "Correct!";
         };
-
+        
+        
     };
+    //figure out how to get to the next question 
+    answerBtns.onclick = currentQuestion ++;
 
-    currentQuestion++;
-}
+    if (currentQuestion == questions.length) {
+        stopQuiz();
+    };
+    
+};
 
 function startQuiz() {
     startScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "hide");
     scoresScreen.setAttribute("class", "hide");
     quizScreen.setAttribute("class", "show");
-
+    
+    //start timer 
    timer = setInterval(function(){
      if (time >= 1) {
         timerCountDown.textContent = time;
@@ -156,7 +181,7 @@ function startQuiz() {
     showQuestions()
 }
 
-//turn the varriable questions into interactive buttons that the user can click to answer
+
 //when a button is clicked it moves on to the next question if question is wrong it will take 10 sec of the timer 
 //when all question are answered then it will run the end quiz function
 
