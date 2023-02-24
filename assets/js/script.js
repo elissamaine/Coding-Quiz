@@ -56,6 +56,7 @@ function openPage() {
     quizScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "hide");
     scoresScreen.setAttribute("class", "hide");
+    startScreen.setAttribute("class", "show");
 };
 
 
@@ -152,18 +153,27 @@ function showQuestions() {
 function answerSelection() {
     //takes to seconds off the timer when the wrong button is pressed
     if (this.value !== questions[questionIndex].answerCorrect) {
-    time = time - 10
-    if (time < 10) {
-            time = 0
+        time = time - 10
+        if (time < 10) {
+            time = 0;
         };
-            timerCountDown.textContent = time;
-            key.textContent = "Incorrect.";
+
+        timerCountDown.textContent = time;
+        key.textContent = "Incorrect.";
+
     } else if(this.value == questions[questionIndex].answerCorrect) {
-            key.textContent = "Correct!";
+        key.textContent = "Correct!";
     };
-       questionIndex ++; 
-       answers.innerHTML = ''
-        showQuestions();
+    
+    questionIndex ++; 
+    answers.innerHTML = '';
+    showQuestions();
+ 
+    //i cant figure out how to get the stop quiz function to work when the last question is answered
+    if (questionIndex == questions.length) {
+        //clearInterval(timer);
+        stopQuiz();
+    };
 };
 
 function startQuiz() {
@@ -185,11 +195,8 @@ function startQuiz() {
 
     //when it gets to the last question it pushed the time to 0 and im not sure why
     // pull up questions 
-    if (questionIndex == questions.length) {
-        clearInterval(timer);
-
-    };
-    showQuestions()
+   
+    showQuestions();
 }
 
 
@@ -197,8 +204,8 @@ function startQuiz() {
 
  
 //add functions for the buttons to restart the quiz again
-tryAgain.onclick = openPage
-
+//tryAgain.onclick = openPage
+tryAgain.addEventListener('click', openPage);
 
 
 
